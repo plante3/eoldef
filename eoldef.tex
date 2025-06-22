@@ -1,7 +1,7 @@
 % eoldef.tex, version 1.0a
 
 % Copyright (C) 2025 plante
-% This file is relased under the LaTeX Project Public License (LPPL) 1.3c.
+% This file is released under the LaTeX Project Public License (LPPL) 1.3c.
 
 % eoldef: define commands which absorb the whole source line as arguments.
 
@@ -28,6 +28,8 @@
 \ifdefined\eoldef
 	\expandafter\endinput
 \fi
+\edef\next{\catcode`\noexpand\@=\the\catcode`\@\space}
+\catcode`\@=11
 
 \protected\def\eoldef#1#2#{%
 	\protected\edef#1{%
@@ -73,3 +75,5 @@
 		\eolarg@command#1\@nil
 	}
 }
+
+\next
