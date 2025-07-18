@@ -68,10 +68,10 @@
 	\begingroup
 		\endlinechar=`\^^M
 		\catcode`\^^M=12
-        \futurelet\eolarg@temp\eolargD
+		\futurelet\eolarg@temp\eolargD
 }
 \begingroup
-    \lccode`+=`\^^M
+	\lccode`+=`\^^M
 	\lccode`$=`\ %
 \lowercase{
 \endgroup
@@ -83,12 +83,13 @@
 		\fi
 	}
 	\def\eolargE${\eolargF}
-    \def\eolargF#1+{%
-        \endgroup
-        \ifnum`{=\z@ }\fi
-        \eolarg@command#1\@nil
-    }
+	\def\eolargF#1+{%
+		\endgroup
+		\ifnum`{=\z@ }\fi
+		\eolarg@command#1\@nil
+	}
 }
 
-
 \next
+
+\endinput
