@@ -1,10 +1,17 @@
-# eoldef
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{eoldef}
+
+\input{eoldef}
+
+\endinput
+
+eoldef.tex, version 1.1
 
 eoldef: define commands which absorb the whole source line as arguments.
 
-Usage: `\eoldef <control sequence> <parameter text> { <replacement text> }`
-defines a control sequence that is delimited by the end-of-line in addition to
-the specified parameter text. This enables less verbose markdown-like syntax.
+Usage: \eoldef <control sequence> <parameter text> { <replacement text> }
+defines a control sequence whose argument is delimited by the end of a
+source code line.
 
 For instance, `\eoldef\test#1:#2{}` and
 
@@ -24,6 +31,7 @@ This package may be used in LaTeX by `\usepackage{eoldef}`, or in plain TeX
 and other formats by `\input{eoldef}`.
 
 Copyright (C) 2025 plante
-Version 1.1
-
 This package is released under the LaTeX Project Public License (LPPL) 1.3c.
+
+See the documentation for usage examples and caveats.
+See file `eoldef.tex` for source code.

@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+
+\usepackage{geometry}
+
+\usepackage{xcolor}
+
+\usepackage{mlmodern}
+
+\usepackage{enumitem}
+\setlist[itemize]{align=parleft,left=0pt..30pt}
+
+\parindent=0pt
+\parskip=\medskipamount
+
+\usepackage[hidelinks]{hyperref}
+
+\protected\def\link{\futurelet\tempa\linkA}
+\def\linkA{\ifx[\tempa \expandafter\linkB \else \expandafter\linkC \fi}
+\long\def\linkB[#1]#2{\href{#2}{\ttul{#1}}}
+\long\def\linkC#1{\href{#1}{\ttul{#1}}}
+\protected\long\def\email#1{\href{mailto:#1}{\ttul{#1}}}
+
+\protected\long\def\ttul#1{%
+	\leavevmode
+	\setbox0=\hbox{\ttfamily #1}%
+	\lower2.25pt\rlap{\leaders\hrule height.625px\hskip\wd0}%
+	\pdfliteral{q 1 G 2 Tr 1.7 w 1 j 1 J}%
+	\rlap{\copy0}%
+	\pdfliteral{Q}%
+	\box0
+}
+
+\usepackage{eoldef}
+
+\title{The \texttt{eoldef} Package, version 1.1}
+\author{plante}
+
+\begin{document}
+
+\maketitle
+
+The \texttt{eoldef} package provides the \verb|\eoldef| and \verb|\eolgdef| commands that define macros whose arguments are delimited by the end of a source code line. They are analogues to \verb|\def| and \verb|\gdef| respectively.
+
+\subsection*{Usage}
+
+Usage:
+	\verb|\eol|%
+	{\color{gray}\verb|[|}\verb|g|{\color{gray}\verb|]|}%
+	\verb|def|%
+	$\,\langle\textit{control sequence}\rangle\,$%
+	$\,\langle\textit{parameter text}\rangle\,$%
+	\verb|{|%
+	$\,\langle\textit{replacement text}\rangle\,$%
+	\verb|}|.
+
+This defines $\langle\textit{control sequence}\rangle$ to essentially have parameter text $\langle\textit{parameter text}\rangle\,$\verb|^^M|, where \verb|^^M| is the end-of-line marker.
+
+As is the case for all category code-changing macros, commands defined by \verb|\eoldef| or \verb|\eolgdef| may not be used normally as part of another command's argument or replacement text.
+However, an alternate syntax is provided in cases where category codes are frozen: the contents of the whole line may be given as a single braced argument, eg.\ \verb|\command{|$\ldots$\verb|}|.
+
+If it happens that the command is to be used with the usual syntax but the contents of the line starts with a braced group, simply insert a space between it and the command to disable the alternate syntax detection, eg.\ \verb*|\command {|$\ldots$\verb|}|$\ldots$
+
+This package may be loaded by \verb|\input{eoldef}| (plain \TeX\ and other formats) or \verb|\usepackage{eoldef}| (\LaTeX). It is line-ending independent.
+
+\newpage
+\subsection*{Samples}
+
+\begin{itemize}
+
+\item Markdown-like syntax for chapter titles:
+\[\halign{&#\hfil\crcr
+	\verb|\catcode`-=\active \eoldef-#1{\chapter{#1}}|\cr
+	\verb|- Chapter Title|\cr
+}\]
+
+\item The following are equivalent:
+\[\halign{&#\hfil\crcr
+	\verb|\eoldef\command#1{|$\ldots$\verb|}|\cr
+	\verb|\command abc def|\cr
+	\verb|\command{abc def}|\cr
+}\]
+
+\item \verb|#1| is \verb|abc| in the first application and \verb|{abc} def| in the second.
+\[\halign{&#\hfil\crcr
+	\verb|\command{abc} def|\cr
+	\verb|\command {abc} def|\cr
+}\]
+
+\item More complex parameter texts may also be used:
+\[\halign{&#\hfil\crcr
+	\verb|\eoldef\command#1:#2{|$\ldots$\verb|}|\cr
+	\verb|\command abc:def|\cr
+}\]
+(\verb|#1| is \verb|abc| while \verb|#2| is \verb|def|.)
+
+
+
+
+\end{itemize}
+
+
+\subsection*{License}
+
+This package is copyright \copyright\ 2025 plante, and
+released under the \LaTeX\ Project Public License (\textsc{lppl}) 1.3c.
+
+\subsection*{Repository}
+
+The upstream repository of this package may be found at
+	\[ \link{https://github.com/plante3/eoldef/tree/main}. \]
+
+\end{document}
